@@ -75,7 +75,7 @@ public class Application {
                 .map(LotteryGrade::getValue)
                 .forEach(grade -> view.printGradeAndPrizeAndQuantity(
                         analytics.getLabel(grade),
-                        analytics.getValue(grade),
+                        grade.getValue(),
                         analytics.getQuantity(grade)));
 
         view.printProfitReport(analytics.getTotalValue().doubleValue() / money.doubleValue());
