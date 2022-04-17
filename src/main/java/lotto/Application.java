@@ -11,12 +11,13 @@ import domain.LotteryNumber;
 import domain.LotteryNumberSupplier;
 import domain.LotteryTicket;
 import domain.LotteryTicketBuilder;
+import domain.Lotto;
+import domain.LottoGroup;
 import domain.TicketGroup;
 import domain.concretes.AutoLotteryNumberSupplier;
 import domain.concretes.ConcreteDriver;
 import domain.concretes.ConcreteLotteryGrader;
 import domain.concretes.ConcreteLotteryTicketBuilder;
-import domain.concretes.ConcreteTicketGroup;
 import domain.concretes.ManualLotteryNumberSupplier;
 import domain.enums.LotteryGrade;
 import languages.Korean;
@@ -34,7 +35,7 @@ public class Application {
         LotteryNumberSupplier manualNumberSupplier = new ManualLotteryNumberSupplier();
         LotteryNumberSupplier autoNumberSupplier = new AutoLotteryNumberSupplier();
         Analytics<Grade> analytics = new ConcreteAnalytics<>();
-        TicketGroup<LotteryTicket> ticketGroup = new ConcreteTicketGroup<>();
+        TicketGroup<Lotto> ticketGroup = new LottoGroup();
         LotteryGrader grader = new ConcreteLotteryGrader();
         view.setLanguage(new Korean());
 
@@ -48,10 +49,10 @@ public class Application {
 
         view.printEnterNumbersToSet();
         for (int i = 0; i < countOfManuallyCreatedTickets; i++) {
-            ticketGroup.addTicket(driver.createLotteryTicket(ticketBuilder, manualNumberSupplier));
+            ticketGroup.addTicket(new Lotto(driver.createLotteryTicket(ticketBuilder, manualNumberSupplier)));
         }
         for (int i = 0; i < countOfAutomaticallyCreatedTickets; i++) {
-            ticketGroup.addTicket(driver.createLotteryTicket(ticketBuilder, autoNumberSupplier));
+            ticketGroup.addTicket(new Lotto(driver.createLotteryTicket(ticketBuilder, autoNumberSupplier)));
         }
         view.printPurchaseReport(countOfManuallyCreatedTickets, countOfAutomaticallyCreatedTickets);
         ticketGroup.getTickets().stream().map(LotteryTicket::toString).forEach(view::printLine);
