@@ -74,7 +74,7 @@ public class Application {
 
         Arrays.asList(LotteryGrade.values()).stream()
                 .map(LotteryGrade::getValue)
-                .forEach(grade -> Main.printGradeAndPrizeAndQuantity(view, grade, analytics));
+                .forEach(grade -> Application.printGradeAndPrizeAndQuantity(view, grade, analytics));
 
         view.printProfitReport(analytics.getTotalValue().doubleValue() / money.doubleValue());
     }
