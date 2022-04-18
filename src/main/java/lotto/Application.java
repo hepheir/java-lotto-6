@@ -76,10 +76,13 @@ public class Application {
                 .map(LotteryGrade::getValue)
                 .forEach(grade -> Application.printGradeAndPrizeAndQuantity(view, grade, analytics));
 
-        view.printProfitReport(analytics.getTotalValue().doubleValue() / money.doubleValue());
+        view.printProfitReport(analytics.getTotalValueOfAll().doubleValue() / money.doubleValue());
     }
 
     private static void printGradeAndPrizeAndQuantity(View view, Grade grade, Analytics<Grade> analytics) {
-        view.printGradeAndPrizeAndQuantity(grade.getLabel(), grade.getValue(), analytics.getQuantity(grade));
+        view.printGradeAndPrizeAndQuantity(
+                analytics.getLabelOf(grade),
+                analytics.getValueOf(grade),
+                analytics.getQuantityOf(grade));
     }
 }
