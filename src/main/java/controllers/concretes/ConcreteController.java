@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 import controllers.Controller;
+import exceptions.LottoException;
 
 public class ConcreteController implements Controller {
     // TODO: Disable Sample Input
@@ -52,7 +53,7 @@ public class ConcreteController implements Controller {
         try {
             return Optional.of(bufferedReader.readLine());
         } catch (IOException e) {
-            // TODO: Exception handling
+            System.out.println("[ERROR]");
         }
         return Optional.empty();
     }
@@ -70,9 +71,9 @@ public class ConcreteController implements Controller {
         try {
             return Optional.of(Integer.parseInt(bufferedReader.readLine()));
         } catch (IOException e) {
-            // TODO: Exception handling
+            System.out.println("[ERROR]");
         } catch (NumberFormatException e) {
-            // TODO: Exception handling
+            System.out.println("[ERROR]");
         }
         return Optional.empty();
     }
@@ -90,9 +91,9 @@ public class ConcreteController implements Controller {
         try {
             return Optional.of(strictlyReadIntegerSequence(delimiter));
         } catch (IOException e) {
-            // TODO: Exception handling
+            System.out.println("[ERROR]");
         } catch (NumberFormatException e) {
-            // TODO: Exception handling
+            System.out.println("[ERROR]");
         }
         return Optional.empty();
     }
